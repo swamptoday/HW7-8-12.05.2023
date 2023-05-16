@@ -1,0 +1,69 @@
+﻿@model TransactionsViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    @using System.Globalization;
+    @{
+        var formatInfo = DateTimeFormatInfo.CurrentInfo;
+    }
+
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+        <label for="month">Select a month:</label>
+        <select name="month" id="month">
+            @for (int i = 1; i <= 12; i++)
+            {
+                <option value="@i">@formatInfo.GetMonthName(i)</option>
+            }
+        </select>
+
+        <label for="year">Select a year:</label>
+        <select name="year" id="year">
+            @for (int i = DateTime.Now.Year - 10; i <= DateTime.Now.Year + 10; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+
+        <button type="submit">Show</button>
+    }
+
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Statistics for @Model.SelectedMonth.ToString("MMMM yyyy")</h1>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">My categories</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Total Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var category in Model.Transactions)
+                        {
+                            <tr>
+                                <td>@category.CategoryName</td>
+                                <td>@category.TotalCost</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+
+</div>

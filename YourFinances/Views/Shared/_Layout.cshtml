@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    @await Html.PartialAsync("MetaPartial")
+
+    @await Html.PartialAsync("CssPartial")
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        @await Html.PartialAsync("SidebarPartial")
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                @await Html.PartialAsync("HeaderPartial")
+
+                @RenderBody()
+                <!-- End of Main Content -->
+                @await Html.PartialAsync("FooterPartial")
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
+        <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        @await Html.PartialAsync("ScriptsPartial")
+
+</body>
+
+</html>
